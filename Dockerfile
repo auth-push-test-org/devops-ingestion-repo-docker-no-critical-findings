@@ -2,7 +2,7 @@ FROM maven:3-jdk-8-alpine
 
 WORKDIR /usr/src/app
 
-COPY . /usr/src/app
+COPY src /usr/src/app
 RUN mvn package
 
 ENV PORT 5000
