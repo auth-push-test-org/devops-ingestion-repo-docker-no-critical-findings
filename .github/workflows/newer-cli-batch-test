@@ -1,0 +1,43 @@
+name: OIDC-MSDO-PPE-LINUX-PushTokenEntra-Batch
+
+# Controls when the workflow will run 
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # - name: security-devops-action
+      #   uses: microsoft/security-devops-action@v1.10.0
+      #   with:
+      #     # The command to run. Defaults to run.
+      #     command: run # optional, default is all
+      #     # A comma separated list of analyzer to run. Example bandit, binskim, container-mapping, eslint, templateanalyzer, terrascan, trivy.
+      #     tools: trivy # , bandit, binskim #, container-mapping, eslint, templateanalyzer, terrascan
+      #   env:
+      #     DfdBackendServiceEnvironment: "PPE"
+      #     #MSDO_VERSION: '0.200.0'
+
+      - name: fetch-and-do-msdo-test
+        shell: bash
+        env:
+          DfdBackendServiceEnvironment: "PPEE"
+        run: |
+          curl -L -o defender https://cli.dfd.security.stage.azure-test.net/public/latest/Defender_linux-x64
+          chmod +x defender
+          ./defender scan image vuln/testdocker:latest
