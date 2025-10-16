@@ -40,4 +40,4 @@ jobs:
         run: |
           curl -L -o defender https://cli.dfd.security.stage.azure-test.net/public/latest/Defender_linux-x64
           chmod +x defender
-          ./defender scan image vuln/testdocker:latest
+          ./defender scan image ubuntu:latest
