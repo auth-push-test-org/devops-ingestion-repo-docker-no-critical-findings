@@ -36,7 +36,7 @@ jobs:
       - name: fetch-and-do-msdo-test
         shell: bash
         env:
-          DfdBackendServiceEnvironment: "PPE"
+          DfdBackendServiceEnvironment: "PPEE"
         run: |
           curl -L -o defender https://cli.dfd.security.stage.azure-test.net/public/latest/Defender_linux-x64
           chmod +x defender
