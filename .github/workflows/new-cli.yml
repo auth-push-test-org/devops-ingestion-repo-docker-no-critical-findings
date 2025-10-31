@@ -38,6 +38,11 @@ jobs:
         env:
           DfdBackendServiceEnvironment: "PPE"
         run: |
+          echo ${{secrets.DOCKER_PASSWORD}} | docker login --username ${{secrets.DOCKER_USERNAME}} --password-stdin ${{secrets.DOCKER_REGISTRY}}
+          docker build -t ${{vars.IMAGE_NAME}} .
+          docker tag ${{vars.IMAGE_NAME}} ${{vars.IMAGE_TARGET}}:V${{github.run_number}}
+          docker tag ${{vars.IMAGE_NAME}} ${{vars.IMAGE_TARGET}}:latest
+          docker push --all-tags ${{vars.IMAGE_TARGET}}
           curl -L -o defender https://cli.dfd.security.stage.azure-test.net/public/latest/Defender_linux-x64
           chmod +x defender
-          ./defender scan image ubuntu:latest
+          ./defender scan image ${{vars.IMAGE_TARGET}}
