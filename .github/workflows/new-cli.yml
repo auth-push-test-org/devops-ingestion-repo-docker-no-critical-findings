@@ -33,7 +33,10 @@ jobs:
       #     DfdBackendServiceEnvironment: "PPE"
       #     #MSDO_VERSION: '0.200.0'
 
-      - name: fetch-and-do-msdo-test
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        
+      - name: build-docker-image-and-do-msdo-test
         shell: bash
         env:
           DfdBackendServiceEnvironment: "PPE"
