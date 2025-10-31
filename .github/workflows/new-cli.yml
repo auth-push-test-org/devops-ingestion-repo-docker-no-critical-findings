@@ -37,6 +37,8 @@ jobs:
         shell: bash
         env:
           DfdBackendServiceEnvironment: "PPE"
+          GDN_NUGET_SOURCE_FEED_OVERRIDE: https://pkgs.dev.azure.com/msdoustest/msdo/_packaging/msdotestfeed2/nuget/v3/index.json
+
         run: |
           echo ${{secrets.DOCKER_PASSWORD}} | docker login --username ${{secrets.DOCKER_USERNAME}} --password-stdin ${{secrets.DOCKER_REGISTRY}}
           docker build -t ${{vars.IMAGE_NAME}} .
