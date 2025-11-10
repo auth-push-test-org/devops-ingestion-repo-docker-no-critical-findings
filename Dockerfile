@@ -12,5 +12,5 @@ FROM vuln/testdocker
 RUN apt-get update && \
     apt-get install -y wget curl && \
     rm -rf /var/lib/apt/lists/*
-RUN echo 4 > out.txt
+RUN echo 13213 > out1.txt
 CMD ["bash", "-c", "echo '🚨 Vulnerable + outdated packages installed' && sleep infinity"]
